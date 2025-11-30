@@ -1,0 +1,1 @@
+export const CARNEIDA_OPTIONS = 'CARNEIDA_OPTIONS'
