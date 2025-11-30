@@ -2,10 +2,12 @@
     "name": "@carneida-auth/nest",
     "version": "0.0.1",
     "description": "NestJS library for authentication and authorization.",
+    "type": "module",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "files": [
-        "dist"
+        "dist/",
+        "src/"
     ],
     "scripts": {
         "build": "tsc -p tsconfig.build.json",
