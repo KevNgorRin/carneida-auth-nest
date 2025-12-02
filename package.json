@@ -1,6 +1,6 @@
 {
     "name": "@carneida-auth/nest",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "NestJS library for authentication and authorization.",
     "type": "module",
     "main": "dist/index.js",
@@ -9,6 +9,12 @@
         "dist/",
         "src/"
     ],
+    "exports": {
+        ".": {
+            "import": "./dist/index.js",
+            "types": "./dist/index.d.ts"
+        }
+    },
     "scripts": {
         "build": "tsc -p tsconfig.build.json",
         "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",

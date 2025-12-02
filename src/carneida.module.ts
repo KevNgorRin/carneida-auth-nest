@@ -14,7 +14,7 @@ import { RefreshTokenUseCase } from '@/use-cases/refresh-token.use-case'
 import { RegisterUserUseCase } from '@/use-cases/register-user.use-case'
 import { ValidatePasswordUseCase } from '@/use-cases/validate-password.use-case'
 
-export interface CarneidaModuleOptions extends TypeORMOptions {
+export interface CarneidaAuthModuleOptions extends TypeORMOptions {
     customControllers?: ModuleMetadata['controllers']
     customServices?: ModuleMetadata['providers']
     NODE_ENV: string
@@ -22,10 +22,10 @@ export interface CarneidaModuleOptions extends TypeORMOptions {
 }
 
 @Module({})
-export class CarneidaModule {
-    static forRoot(options: CarneidaModuleOptions): DynamicModule {
+export class CarneidaAuthModule {
+    static forRoot(options: CarneidaAuthModuleOptions): DynamicModule {
         return {
-            module: CarneidaModule,
+            module: CarneidaAuthModule,
             imports: [
                 ConfigModule.forRoot({ isGlobal: true }),
                 TypeOrmModule.forRoot(getTypeOrmConfig(options)),

@@ -6,7 +6,7 @@ import { InjectRepository } from '@nestjs/typeorm'
 import { CookieOptions, Response } from 'express'
 import { Repository } from 'typeorm'
 
-import { CarneidaModuleOptions } from '@/carneida.module'
+import { CarneidaAuthModuleOptions } from '@/carneida.module'
 import { CARNEIDA_OPTIONS } from '@/constants/config.constants'
 import { refreshTokenCookieName } from '@/constants/cookie-names.constants'
 import { ValidateRefreshTokenDto } from '@/dtos/validate-refresh-token.dto'
@@ -26,7 +26,7 @@ export class SessionsService {
 
     constructor(
         @Inject(CARNEIDA_OPTIONS)
-        private options: CarneidaModuleOptions,
+        private options: CarneidaAuthModuleOptions,
 
         @InjectRepository(Session)
         private readonly sessionsRepository: Repository<Session>,
