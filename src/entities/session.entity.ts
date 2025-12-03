@@ -4,7 +4,7 @@ import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm'
 import { BaseEntity } from '@/entities/base.entity'
 import { SessionUser } from '@/entities/user.entity'
 
-@Entity({ name: 'sessions' })
+@Entity({ name: 'carneida_auth_sessions' })
 export class Session extends BaseEntity {
     @ApiProperty()
     @ManyToOne(() => SessionUser, (user) => user.sessions)
