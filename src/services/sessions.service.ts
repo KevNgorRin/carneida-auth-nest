@@ -12,13 +12,13 @@ import {
     accessTokenCookieName,
     refreshTokenCookieName,
 } from '@/constants/cookie-names.constants'
+import { PublicSessionTokens } from '@/dtos/public-session-tokens'
 import { ValidateRefreshTokenDto } from '@/dtos/validate-refresh-token.dto'
 import { Session } from '@/entities/session.entity'
 import { SessionUser } from '@/entities/user.entity'
 import { AuthError } from '@/enums/auth-errors.enum'
 import { getCookieOptions } from '@/helpers/get-cookie-options.helper'
 import {
-    PublicSessionTokens,
     SessionTokenPayload,
     SessionTokens,
 } from '@/interfaces/session-tokens.interface'

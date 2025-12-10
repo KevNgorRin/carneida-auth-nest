@@ -3,7 +3,7 @@ import { ApiOperation, ApiResponse } from '@nestjs/swagger'
 import { Request, Response } from 'express'
 
 import { LogInWithCredentialsDto } from '@/dtos/login-with-credentials.dto'
-import { PublicSessionTokens } from '@/interfaces/session-tokens.interface'
+import { PublicSessionTokens } from '@/dtos/public-session-tokens'
 import { LogInWithCredentialsUseCase } from '@/use-cases/login-with-credentials.use-case'
 import { RefreshTokenUseCase } from '@/use-cases/refresh-token.use-case'
 
@@ -20,6 +20,7 @@ export class AuthController {
     @ApiResponse({
         status: 201,
         description: 'OK',
+        type: PublicSessionTokens,
     })
     @Put('login')
     async logIn(
@@ -35,6 +36,7 @@ export class AuthController {
     @ApiResponse({
         status: 200,
         description: 'OK',
+        type: PublicSessionTokens,
     })
     @Post('refresh')
     async refresh(

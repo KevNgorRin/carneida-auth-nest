@@ -10,7 +10,7 @@ export * from './dtos/register-user.dto'
 export * from './dtos/validate-refresh-token.dto'
 
 // Entities
-export * from './entities/base.entity'
+export * from './database/entities.constants'
 export * from './entities/session.entity'
 export * from './entities/user.entity'
 

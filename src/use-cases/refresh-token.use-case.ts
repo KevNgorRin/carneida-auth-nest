@@ -2,8 +2,8 @@ import { Injectable, UnauthorizedException } from '@nestjs/common'
 import { Request, Response } from 'express'
 
 import { refreshTokenCookieName } from '@/constants/cookie-names.constants'
+import { PublicSessionTokens } from '@/dtos/public-session-tokens'
 import { AuthError } from '@/enums/auth-errors.enum'
-import { PublicSessionTokens } from '@/interfaces/session-tokens.interface'
 import { SessionsService } from '@/services/sessions.service'
 
 @Injectable()

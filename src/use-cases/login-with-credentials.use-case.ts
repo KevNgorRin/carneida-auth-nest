@@ -4,9 +4,9 @@ import { Response } from 'express'
 import { Equal, Repository } from 'typeorm'
 
 import { LogInWithCredentialsDto } from '@/dtos/login-with-credentials.dto'
+import { PublicSessionTokens } from '@/dtos/public-session-tokens'
 import { SessionUser } from '@/entities/user.entity'
 import { AuthError } from '@/enums/auth-errors.enum'
-import { PublicSessionTokens } from '@/interfaces/session-tokens.interface'
 import { SessionsService } from '@/services/sessions.service'
 import { ValidatePasswordUseCase } from '@/use-cases/validate-password.use-case'
 

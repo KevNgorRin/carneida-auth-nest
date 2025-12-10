@@ -4,7 +4,7 @@ import { Column, Entity, Index, ManyToOne } from 'typeorm'
 import { BaseEntity } from '@/entities/base.entity'
 import { Session } from '@/entities/session.entity'
 
-@Entity({ name: 'session_users' })
+@Entity({ name: 'carneida_auth_session_users' })
 export class SessionUser extends BaseEntity {
     @ApiProperty()
     @Index()
