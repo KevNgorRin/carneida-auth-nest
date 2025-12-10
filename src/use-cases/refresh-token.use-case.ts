@@ -1,5 +1,5 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common'
-import { Request } from 'express'
+import { Request, Response } from 'express'
 
 import { refreshTokenCookieName } from '@/constants/cookie-names.constants'
 import { AuthError } from '@/enums/auth-errors.enum'
@@ -12,8 +12,10 @@ export class RefreshTokenUseCase {
 
     async execute({
         request,
+        response,
     }: {
         request: Request
+        response: Response
     }): Promise<PublicSessionTokens> {
         const refreshToken = request.headers.cookie
             ?.split('; ')
@@ -29,6 +31,6 @@ export class RefreshTokenUseCase {
             throw new UnauthorizedException(AuthError.SESSION_NOT_VALID)
         }
 
-        return this.sessionsService.refresh({ refreshToken })
+        return this.sessionsService.refresh({ refreshToken, response })
     }
 }

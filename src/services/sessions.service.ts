@@ -3,12 +3,15 @@ import { UUID } from 'crypto'
 import { Inject, Injectable, UnauthorizedException } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { InjectRepository } from '@nestjs/typeorm'
-import { CookieOptions, Response } from 'express'
+import { Response } from 'express'
 import { Repository } from 'typeorm'
 
 import { CarneidaAuthModuleOptions } from '@/carneida.module'
 import { CARNEIDA_OPTIONS } from '@/constants/config.constants'
-import { refreshTokenCookieName } from '@/constants/cookie-names.constants'
+import {
+    accessTokenCookieName,
+    refreshTokenCookieName,
+} from '@/constants/cookie-names.constants'
 import { ValidateRefreshTokenDto } from '@/dtos/validate-refresh-token.dto'
 import { Session } from '@/entities/session.entity'
 import { SessionUser } from '@/entities/user.entity'
@@ -22,7 +25,7 @@ import {
 
 @Injectable()
 export class SessionsService {
-    private readonly cookieOptions: CookieOptions = {}
+    private readonly isProduction: boolean
 
     constructor(
         @Inject(CARNEIDA_OPTIONS)
@@ -33,9 +36,7 @@ export class SessionsService {
 
         private readonly jwtService: JwtService,
     ) {
-        this.cookieOptions = getCookieOptions({
-            secure: this.options.NODE_ENV.startsWith('prod'),
-        })
+        this.isProduction = this.options.NODE_ENV.startsWith('prod')
     }
 
     async open({
@@ -52,9 +53,19 @@ export class SessionsService {
         )
 
         response.cookie(
+            accessTokenCookieName,
+            tokens.accessToken,
+            getCookieOptions({
+                secure: this.isProduction,
+                httpOnly: false,
+            }),
+        )
+        response.cookie(
             refreshTokenCookieName,
             tokens.refreshToken,
-            this.cookieOptions,
+            getCookieOptions({
+                secure: this.isProduction,
+            }),
         )
 
         return { accessToken: tokens.accessToken }
@@ -62,8 +73,10 @@ export class SessionsService {
 
     async refresh({
         refreshToken,
+        response,
     }: {
         refreshToken: string
+        response: Response
     }): Promise<PublicSessionTokens> {
         const payload = this.jwtService.decode(refreshToken)
         const newAccessToken = this.generateAccessToken({
@@ -76,6 +89,15 @@ export class SessionsService {
         await this.sessionsRepository.update(
             { refreshToken },
             { accessToken: newAccessToken },
+        )
+
+        response.cookie(
+            accessTokenCookieName,
+            newAccessToken,
+            getCookieOptions({
+                secure: this.isProduction,
+                httpOnly: false,
+            }),
         )
 
         return { accessToken: newAccessToken }

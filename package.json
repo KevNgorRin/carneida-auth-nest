@@ -1,6 +1,6 @@
 {
     "name": "@carneida-auth/nest",
-    "version": "0.0.4",
+    "version": "0.0.6",
     "description": "NestJS library for authentication and authorization.",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",

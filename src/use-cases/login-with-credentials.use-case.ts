@@ -41,7 +41,7 @@ export class LogInWithCredentialsUseCase {
         })
 
         if (!user) {
-            throw new UnauthorizedException(AuthError.USER_NOT_FOUND)
+            throw new UnauthorizedException(AuthError.INVALID_CREDENTIALS)
         }
 
         const passwordMatches = await this.validatePassword.execute({

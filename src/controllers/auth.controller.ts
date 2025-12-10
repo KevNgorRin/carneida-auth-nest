@@ -37,7 +37,10 @@ export class AuthController {
         description: 'OK',
     })
     @Post('refresh')
-    async refresh(@Req() request: Request): Promise<PublicSessionTokens> {
-        return this.refreshToken.execute({ request })
+    async refresh(
+        @Req() request: Request,
+        @Res({ passthrough: true }) response: Response,
+    ): Promise<PublicSessionTokens> {
+        return this.refreshToken.execute({ request, response })
     }
 }
